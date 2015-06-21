@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:platresize="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/master_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:id="@+id/balanceHeader"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="#F2F2F2"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/common_accountbalance_label_title"
+
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:gravity="center_vertical|left"
+            android:text="Available Balance"
+            android:textColor="#4D4F53" />
+
+        <TextView
+            android:id="@+id/common_accountbalance_label_amount"
+
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical|left"
+            android:textColor="#4D4F53" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F2F2F2" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/balanceHeader"
+        android:gravity="center">
+
+
+        <com.nanodegree.roshan.popularmoviesapp.widgets.LockableScrollView
+            android:id="@+id/content_scrollview_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fadingEdge="none"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            android:requiresFadingEdge="none"
+            android:scrollbars="none">
+
+            <FrameLayout
+                android:id="@+id/content_frame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.nanodegree.roshan.popularmoviesapp.widgets.LockableScrollView>
+    </RelativeLayout>
+
+</RelativeLayout>

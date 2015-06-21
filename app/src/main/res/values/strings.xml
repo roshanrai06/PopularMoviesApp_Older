@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Popular Movies App</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blsdsjdgsjdgjg </string>
+    <string name="title_activity_base_action_activty">BaseActionActivty</string>
+    <string name="title_activity_popular_movies_base">PopularMoviesBaseActivity</string>
+    <string name="title_activity_movies_dashboard">MoviesDashboardActivity</string>
+    <string name="title_activity_popular_movies_details">PopularMoviesDetailsActivity</string>
+    <string name="title_fragment_popular_movies_details">PopularMoviesDetailsFragment</string>
+
+</resources>
