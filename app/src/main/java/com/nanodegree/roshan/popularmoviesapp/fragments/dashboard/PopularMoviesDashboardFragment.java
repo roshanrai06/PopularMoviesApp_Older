@@ -65,4 +65,8 @@ public class PopularMoviesDashboardFragment extends PopularMoviesBaseFragment<Po
         void onDashboardButtonClicked();
     }
 
+    @Override
+    public void onBackClicked() {
+
+    }
 }

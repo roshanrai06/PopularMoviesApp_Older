@@ -16,6 +16,15 @@ public class PopularMoviesDashboardActivity extends PopularMoviesBaseActivity im
 
     }
 
+    @Override
+    public void onRequestDisplayShowHomeEnabled(boolean value) {
+        super.onRequestDisplayShowHomeEnabled(false);
+    }
+
+    @Override
+    public void onSuggestShowAvailableBalance(boolean show) {
+        super.onSuggestShowAvailableBalance(true);
+    }
 
     @Override
     public void onDashboardButtonClicked() {
