@@ -54,12 +54,16 @@ public abstract class BaseFragment<E extends BaseFragment.BaseFragmentListener> 
         public void restorePreviousActionBarColors(int color);
     }
 
-    public void showBackButton() {
-        if (mActivity instanceof BaseActivity) {
-            ((BaseActivity) mActivity).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-    }
+   	protected void dismissKeyboard(View viewHoldingKeyboardForum) {
+		getCallback().dismissKeyboard(viewHoldingKeyboardForum);
+	}
 
+	protected void showKeyboard(EditText editText) {
+		getCallback().showKeyboard(editText);
+	}
+  public void showToast(String message) {
+		getCallback().showToast(message);
+	}
     public E getCallback() {
         return mCallback;
     }
