@@ -47,7 +47,18 @@
         android:layout_below="@+id/balanceHeader"
         android:gravity="center">
 
+            <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
 
+            <ProgressBar
+                android:id="@+id/common_loading_display"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+        </FrameLayout>
         <com.nanodegree.roshan.popularmoviesapp.widgets.LockableScrollView
             android:id="@+id/content_scrollview_parent"
             android:layout_width="match_parent"
