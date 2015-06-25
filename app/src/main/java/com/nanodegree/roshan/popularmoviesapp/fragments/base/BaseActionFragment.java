@@ -14,7 +14,14 @@ public abstract class BaseActionFragment<E extends BaseActionFragment.BaseAction
 
 
     }
-
+           @Override
+	public void onStart() {
+		super.onStart();
+		if (getFragmentTitleResource() != -1)
+			getCallback().onRequestTitleUpdate(getFragmentTitleResource());
+		getCallback().onRequestDisplayHomeAsUpEnabled(requestDisplayHomeAsUpEnabled());
+		getCallback().onRequestDisplayShowHomeEnabled(requestDisplayShowHomeEnabled());
+	}
 
     public abstract int getFragmentTitleResource();
 
