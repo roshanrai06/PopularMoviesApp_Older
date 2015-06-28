@@ -41,14 +41,14 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseFrag
     }
 
     @Override
-    public void showKeyboard(EditText editText) {
+    public void showKeyboard(final EditText editText) {
            mHandler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
 				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 				imm.showSoftInput(editText, InputMethodManager.SHOW_FORCED);
 			}
-		}, 500)
+		}, 500);
 
     }
 

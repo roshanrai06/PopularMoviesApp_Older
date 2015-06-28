@@ -169,7 +169,8 @@ public class PopularMoviesBaseActivity extends BaseActionActivity implements Pop
 /**
 	 * Show activity loading display
 	 */
-	public void showLoadingDisplay() {
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public void showLoadingDisplay() {
 		if (mLoadingDisplay)
 			return;
 		mProgressBar.setVisibility(View.VISIBLE);
@@ -177,14 +178,16 @@ public class PopularMoviesBaseActivity extends BaseActionActivity implements Pop
 		mAnimSet = new AnimatorSet();
 		mAnimSet.playTogether(ObjectAnimator.ofFloat(mContent, "alpha", 1.0f, 0.5f));
 		mAnimSet.setDuration(ANIMATION_TRANSITION_DURATION).start();
-		lockOrientation();
-		lockTouchInput();
+		//lockOrientation();
+		//lockTouchInput();
 	}
 	
 	/**
 	 * Hide activity loading display
 	 */
-	public void hideLoadingDisplay() {
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public void hideLoadingDisplay() {
 		if (!mLoadingDisplay)
 			return;
 		mProgressBar.setVisibility(View.INVISIBLE);
@@ -194,7 +197,7 @@ public class PopularMoviesBaseActivity extends BaseActionActivity implements Pop
 		mAnimSet.playTogether(ObjectAnimator.ofFloat(mContent, "alpha", 0.5f, 1.0f)// ,
 		// ObjectAnimator.ofFloat(mContent, "rotationY", ANIMATION_ROTATION_AMT, 0)
 		);
-		unLockOrientation();
+		//unLockOrientation();
 		unlockTouchInput();
 		mAnimSet.setDuration(ANIMATION_TRANSITION_DURATION).start();
 	}

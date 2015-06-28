@@ -23,6 +23,14 @@ public abstract class BaseActionFragment<E extends BaseActionFragment.BaseAction
 		getCallback().onRequestDisplayShowHomeEnabled(requestDisplayShowHomeEnabled());
 	}
 
+    private boolean requestDisplayShowHomeEnabled() {
+        return true;
+    }
+
+    protected  boolean requestDisplayHomeAsUpEnabled(){
+      return true;
+    }
+
     public abstract int getFragmentTitleResource();
 
 
@@ -61,7 +69,7 @@ public abstract class BaseActionFragment<E extends BaseActionFragment.BaseAction
     @Override
     public void onBackClicked() {
 Log.d("Roshan","BackLicked");
-        getFragmentManager().popBackStackImmediate();
+        getCallback().onFragmentActionBack();
 
 
 
