@@ -1,9 +1,6 @@
 package com.nanodegree.roshan.popularmoviesapp;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
-import android.annotation.TargetApi;
-import android.os.Build;
+
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.view.Menu;
@@ -16,6 +13,8 @@ import android.widget.TextView;
 
 import com.nanodegree.roshan.popularmoviesapp.fragments.base.PopularMoviesBaseFragment;
 import com.nanodegree.roshan.popularmoviesapp.widgets.LockableScrollView;
+import com.nineoldandroids.animation.AnimatorSet;
+import com.nineoldandroids.animation.ObjectAnimator;
 
 public class PopularMoviesBaseActivity extends BaseActionActivity implements PopularMoviesBaseFragment.PopularMoviesBaseFragmentListener, FragmentManager.OnBackStackChangedListener {
     private static final String SAVE_SHOWING_HEADER = "SAVE_SHOWING_HEADER";
@@ -169,7 +168,7 @@ public class PopularMoviesBaseActivity extends BaseActionActivity implements Pop
 /**
 	 * Show activity loading display
 	 */
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+
     public void showLoadingDisplay() {
 		if (mLoadingDisplay)
 			return;
@@ -186,7 +185,7 @@ public class PopularMoviesBaseActivity extends BaseActionActivity implements Pop
 	 * Hide activity loading display
 	 */
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+
     public void hideLoadingDisplay() {
 		if (!mLoadingDisplay)
 			return;
@@ -221,7 +220,7 @@ public class PopularMoviesBaseActivity extends BaseActionActivity implements Pop
      *
      * @param reverse
      */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+
     private void startTransitionDisplay(boolean reverse) {
         mAnimSet = new AnimatorSet();
         mAnimSet.playTogether(ObjectAnimator.ofFloat(mContent, "rotationY", 0, reverse ? ANIMATION_ROTATION_AMT * -1 : ANIMATION_ROTATION_AMT));
@@ -234,7 +233,7 @@ public class PopularMoviesBaseActivity extends BaseActionActivity implements Pop
      *
      * @param reverse
      */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+
     private void stopTransitionDisplay(boolean reverse) {
         mAnimSet = new AnimatorSet();
         mAnimSet.playTogether(ObjectAnimator.ofFloat(mContent, "rotationY", reverse ? ANIMATION_ROTATION_AMT * -1 : ANIMATION_ROTATION_AMT, 0));
@@ -246,6 +245,7 @@ public class PopularMoviesBaseActivity extends BaseActionActivity implements Pop
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+        onFragmentActionBack();
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
