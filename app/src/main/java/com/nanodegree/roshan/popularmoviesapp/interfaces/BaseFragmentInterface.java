@@ -6,7 +6,6 @@ package com.nanodegree.roshan.popularmoviesapp.interfaces;
 public interface BaseFragmentInterface {
     /**
      * Abstract method to be implemented to get the fragment tag
-     * @return
      */
-    public abstract String getFragmentTag();
+    String getFragmentTag();
 }

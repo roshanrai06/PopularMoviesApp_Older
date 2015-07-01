@@ -7,13 +7,15 @@ public interface BaseActionFragmentInterface {
     /**
      * Activity will call this if it want to ask the fragment for navigation advice
      */
-    public abstract void onBackClicked();
+    void onBackClicked();
+
     /**
      * Activity will call this if it want to ask the fragment for navigation advice
      */
-    public abstract void onHomeLogoClick();
+    void onHomeLogoClick();
+
     /**
      * Suggested ActionBar title resource
      */
-    public abstract int getFragmentTitleResource();
+    int getFragmentTitleResource();
 }
