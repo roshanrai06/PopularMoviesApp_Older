@@ -16,17 +16,25 @@ import com.nanodegree.roshan.popularmoviesapp.widgets.LockableScrollView;
 import com.nineoldandroids.animation.AnimatorSet;
 import com.nineoldandroids.animation.ObjectAnimator;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class PopularMoviesBaseActivity extends BaseActionActivity implements PopularMoviesBaseFragment.PopularMoviesBaseFragmentListener, FragmentManager.OnBackStackChangedListener {
     private static final String SAVE_SHOWING_HEADER = "SAVE_SHOWING_HEADER";
     private final int ANIMATION_TRANSITION_DURATION = 500;
     private final int ANIMATION_ROTATION_AMT = 0;// -2;
-    protected ProgressBar mProgressBar;
-    private FrameLayout mContent;
     protected boolean mLoadingDisplay = false;
     private boolean mShowingHeader = false;
     private AnimatorSet mAnimSet;
-    private View mBalanceHeader;
-    private LockableScrollView mContentScrollView;
+
+    @Bind(R.id.common_loading_display)
+    protected ProgressBar mProgressBar;
+    @Bind(R.id.content_frame)
+    protected FrameLayout mContent;
+    @Bind(R.id.balanceHeader)
+    protected View mBalanceHeader;
+    @Bind(R.id.content_scrollview_parent)
+    protected LockableScrollView mContentScrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +42,12 @@ public class PopularMoviesBaseActivity extends BaseActionActivity implements Pop
         setContentView(R.layout.activity_popular_movies_base);
         setupActionBar();
         getSupportFragmentManager().addOnBackStackChangedListener(this);
+        ButterKnife.bind(this);
 
-        mContent = (FrameLayout) findViewById(R.id.content_frame);
-        mProgressBar = (ProgressBar) findViewById(R.id.common_loading_display);
-        mBalanceHeader = findViewById(R.id.balanceHeader);
-        mContentScrollView = (LockableScrollView) findViewById(R.id.content_scrollview_parent);
+//        mContent = (FrameLayout) findViewById(R.id.content_frame);
+//        mProgressBar = (ProgressBar) findViewById(R.id.common_loading_display);
+//        mBalanceHeader = findViewById(R.id.balanceHeader);
+//        mContentScrollView = (LockableScrollView) findViewById(R.id.content_scrollview_parent);
         if (savedInstanceState != null) {
             if (savedInstanceState.containsKey(SAVE_SHOWING_HEADER)) {
                 mShowingHeader = savedInstanceState.getBoolean(SAVE_SHOWING_HEADER, false);
@@ -165,41 +174,43 @@ public class PopularMoviesBaseActivity extends BaseActionActivity implements Pop
             lockScrollView();
         }
     }
-/**
-	 * Show activity loading display
-	 */
+
+    /**
+     * Show activity loading display
+     */
 
     public void showLoadingDisplay() {
-		if (mLoadingDisplay)
-			return;
-		mProgressBar.setVisibility(View.VISIBLE);
-		mLoadingDisplay = true;
-		mAnimSet = new AnimatorSet();
-		mAnimSet.playTogether(ObjectAnimator.ofFloat(mContent, "alpha", 1.0f, 0.5f));
-		mAnimSet.setDuration(ANIMATION_TRANSITION_DURATION).start();
-		//lockOrientation();
-		//lockTouchInput();
-	}
-	
-	/**
-	 * Hide activity loading display
-	 */
+        if (mLoadingDisplay)
+            return;
+        mProgressBar.setVisibility(View.VISIBLE);
+        mLoadingDisplay = true;
+        mAnimSet = new AnimatorSet();
+        mAnimSet.playTogether(ObjectAnimator.ofFloat(mContent, "alpha", 1.0f, 0.5f));
+        mAnimSet.setDuration(ANIMATION_TRANSITION_DURATION).start();
+        //lockOrientation();
+        //lockTouchInput();
+    }
+
+    /**
+     * Hide activity loading display
+     */
 
 
     public void hideLoadingDisplay() {
-		if (!mLoadingDisplay)
-			return;
-		mProgressBar.setVisibility(View.INVISIBLE);
-		mLoadingDisplay = false;
-		// setRequestedOrientation(mLastRequestedOrientation);
-		mAnimSet = new AnimatorSet();
-		mAnimSet.playTogether(ObjectAnimator.ofFloat(mContent, "alpha", 0.5f, 1.0f)// ,
-		// ObjectAnimator.ofFloat(mContent, "rotationY", ANIMATION_ROTATION_AMT, 0)
-		);
-		//unLockOrientation();
-		unlockTouchInput();
-		mAnimSet.setDuration(ANIMATION_TRANSITION_DURATION).start();
-	}
+        if (!mLoadingDisplay)
+            return;
+        mProgressBar.setVisibility(View.INVISIBLE);
+        mLoadingDisplay = false;
+        // setRequestedOrientation(mLastRequestedOrientation);
+        mAnimSet = new AnimatorSet();
+        mAnimSet.playTogether(ObjectAnimator.ofFloat(mContent, "alpha", 0.5f, 1.0f)// ,
+                // ObjectAnimator.ofFloat(mContent, "rotationY", ANIMATION_ROTATION_AMT, 0)
+        );
+        //unLockOrientation();
+        unlockTouchInput();
+        mAnimSet.setDuration(ANIMATION_TRANSITION_DURATION).start();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
