@@ -11,6 +11,8 @@ import android.widget.EditText;
 import com.nanodegree.roshan.popularmoviesapp.BaseActivity;
 import com.nanodegree.roshan.popularmoviesapp.interfaces.BaseFragmentInterface;
 
+import butterknife.ButterKnife;
+
 /**
  * A placeholder fragment containing a simple view.
  */
@@ -94,7 +96,10 @@ public abstract class BaseFragment<E extends BaseFragment.BaseFragmentListener> 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(getLayout(), container, false);
+        ButterKnife.bind(rootView);
         onInitFragment(rootView, savedInstanceState);
+
+
         return rootView;
     }
 }

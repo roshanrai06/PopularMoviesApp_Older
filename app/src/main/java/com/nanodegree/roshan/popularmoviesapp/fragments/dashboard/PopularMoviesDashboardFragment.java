@@ -2,16 +2,20 @@ package com.nanodegree.roshan.popularmoviesapp.fragments.dashboard;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.GridView;
 
 import com.nanodegree.roshan.popularmoviesapp.R;
+import com.nanodegree.roshan.popularmoviesapp.adapters.ImageAdapter;
 import com.nanodegree.roshan.popularmoviesapp.fragments.base.PopularMoviesBaseFragment;
+
+import butterknife.Bind;
 
 public class PopularMoviesDashboardFragment extends PopularMoviesBaseFragment<PopularMoviesDashboardFragment.PopularMoviesDashboardFragmentListener> {
 
 
     public static String FRAGMENT_TAG = "PopularMoviesDashboardFragment";
-
+    @Bind(R.id.gridview)
+    protected GridView gridview;
 
     public static PopularMoviesDashboardFragment newInstance() {
         PopularMoviesDashboardFragment fragment = new PopularMoviesDashboardFragment();
@@ -38,13 +42,7 @@ public class PopularMoviesDashboardFragment extends PopularMoviesBaseFragment<Po
 
     @Override
     public View onInitFragment(View rootView, Bundle savedInstanceState) {
-        final Button dashboard_button = (Button) rootView.findViewById(R.id.button_dashboard);
-        dashboard_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getCallback().onDashboardButtonClicked();
-            }
-        });
+        gridview.setAdapter(new ImageAdapter(getActivity()));
         return rootView;
     }
 
@@ -67,6 +65,6 @@ public class PopularMoviesDashboardFragment extends PopularMoviesBaseFragment<Po
 
     @Override
     public void onBackClicked() {
-getCallback().onFragmentActionFinish();
+        getCallback().onFragmentActionFinish();
     }
 }
