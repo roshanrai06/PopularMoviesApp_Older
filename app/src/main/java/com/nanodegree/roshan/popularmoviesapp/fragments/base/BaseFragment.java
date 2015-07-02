@@ -96,7 +96,7 @@ public abstract class BaseFragment<E extends BaseFragment.BaseFragmentListener> 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(getLayout(), container, false);
-        ButterKnife.bind(rootView);
+         ButterKnife.bind(this, rootView);
         onInitFragment(rootView, savedInstanceState);
 
 
