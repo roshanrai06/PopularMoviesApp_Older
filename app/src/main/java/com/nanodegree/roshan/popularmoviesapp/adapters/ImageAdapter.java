@@ -4,62 +4,54 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.nanodegree.roshan.popularmoviesapp.R;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 /**
- * Created by roshan.rai on 7/2/2015.
+ * Created by Roshan Rai on 7/2/2015.
  */
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
+    private ArrayList<String> items;
 
-    public ImageAdapter(Context c) {
+    public ImageAdapter(Context c, ArrayList<String> items) {
         mContext = c;
+        this.items = items;
     }
 
     public int getCount() {
-        return mThumbIds.length;
+        return items.size();
     }
 
     public Object getItem(int position) {
-        return null;
+        return items.get(position);
     }
 
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     // create a new ImageView for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView;
         if (convertView == null) {
-            // if it's not recycled, initialize some attributes
             imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 8, 8, 8);
+            imageView.setAdjustViewBounds(true);
+            imageView.setPadding(0, 0, 0, 0);
         } else {
             imageView = (ImageView) convertView;
         }
 
-        imageView.setImageResource(mThumbIds[position]);
+
+        Picasso.with(mContext).load(mContext.getString(R.string.image_base_url) + items.get(position)).into(imageView);
+
         return imageView;
+
     }
 
-    // references to our images
-    private Integer[] mThumbIds = {
-            R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7,
-            R.drawable.sample_0, R.drawable.sample_1,
-            R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7,
-            R.drawable.sample_0, R.drawable.sample_1,
-            R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7
-    };
+
 }

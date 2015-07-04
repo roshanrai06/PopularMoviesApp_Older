@@ -31,7 +31,7 @@ public abstract class BaseActionActivity extends BaseActivity implements BaseAct
     }
 
 
-//     Swap in a new never leave fragment using the default animation If you are displaying the default loading interface, this method will disable the interface and transition properly
+//     Launch  a new never leave fragment using the default animation If you are displaying the default loading interface, this method will disable the interface and transition properly
 
 
     public void launchFragment(Fragment fragment) {

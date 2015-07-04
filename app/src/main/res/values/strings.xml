@@ -4,11 +4,15 @@
     <string name="action_settings">Settings</string>
 
 <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Popular Movies App</string>
+    <string name="popular_movies_fragment_title">Popular Movies</string>
     <string name="title_activity_base_action_activty">BaseActionActivty</string>
     <string name="title_activity_popular_movies_base">PopularMoviesBaseActivity</string>
     <string name="title_activity_movies_dashboard">MoviesDashboardActivity</string>
     <string name="title_activity_popular_movies_details">PopularMoviesDetailsActivity</string>
     <string name="title_fragment_popular_movies_details">PopularMoviesDetailsFragment</string>
+
+    <string name="base_url">http://api.themoviedb.org/3</string>
+    <string name="image_base_url">http://image.tmdb.org/t/p/w185/</string>
+    <string name="api_key">c0bb908a2d5205db7c1b0202b8d24dda</string>
 
 </resources>

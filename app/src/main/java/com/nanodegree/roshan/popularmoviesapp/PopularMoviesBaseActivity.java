@@ -12,7 +12,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nanodegree.roshan.popularmoviesapp.fragments.base.PopularMoviesBaseFragment;
-import com.nanodegree.roshan.popularmoviesapp.widgets.LockableScrollView;
 import com.nineoldandroids.animation.AnimatorSet;
 import com.nineoldandroids.animation.ObjectAnimator;
 
@@ -33,8 +32,7 @@ public class PopularMoviesBaseActivity extends BaseActionActivity implements Pop
     protected FrameLayout mContent;
     @Bind(R.id.balanceHeader)
     protected View mBalanceHeader;
-    @Bind(R.id.content_scrollview_parent)
-    protected LockableScrollView mContentScrollView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +42,7 @@ public class PopularMoviesBaseActivity extends BaseActionActivity implements Pop
         getSupportFragmentManager().addOnBackStackChangedListener(this);
         ButterKnife.bind(this);
 
-//        mContent = (FrameLayout) findViewById(R.id.content_frame);
-//        mProgressBar = (ProgressBar) findViewById(R.id.common_loading_display);
-//        mBalanceHeader = findViewById(R.id.balanceHeader);
-//        mContentScrollView = (LockableScrollView) findViewById(R.id.content_scrollview_parent);
+
         if (savedInstanceState != null) {
             if (savedInstanceState.containsKey(SAVE_SHOWING_HEADER)) {
                 mShowingHeader = savedInstanceState.getBoolean(SAVE_SHOWING_HEADER, false);
@@ -138,44 +133,6 @@ public class PopularMoviesBaseActivity extends BaseActionActivity implements Pop
 
 
     /**
-     * To get the lockable master layout scroll view
-     *
-     * @return
-     */
-    public LockableScrollView getMasterScrollView() {
-        return mContentScrollView;
-    }
-
-    /**
-     * To lock the scroll view
-     */
-    protected void lockScrollView() {
-        if (mContentScrollView != null) {
-            mContentScrollView.setScrollContainer(false);
-            mContentScrollView.setScrollingEnabled(false);
-        }
-    }
-
-    /**
-     * To unlock the scroll view
-     */
-    protected void unlockScrollView() {
-        if (mContentScrollView != null) {
-            mContentScrollView.setScrollContainer(true);
-            mContentScrollView.setScrollingEnabled(true);
-        }
-    }
-
-    @Override
-    public void allowViewToScroll(boolean fragmentScrolling) {
-        if (fragmentScrolling) {
-            unlockScrollView();
-        } else {
-            lockScrollView();
-        }
-    }
-
-    /**
      * Show activity loading display
      */
 
@@ -187,8 +144,7 @@ public class PopularMoviesBaseActivity extends BaseActionActivity implements Pop
         mAnimSet = new AnimatorSet();
         mAnimSet.playTogether(ObjectAnimator.ofFloat(mContent, "alpha", 1.0f, 0.5f));
         mAnimSet.setDuration(ANIMATION_TRANSITION_DURATION).start();
-        //lockOrientation();
-        //lockTouchInput();
+
     }
 
     /**
@@ -213,7 +169,6 @@ public class PopularMoviesBaseActivity extends BaseActionActivity implements Pop
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_popular_movies_base, menu);
         return true;
     }

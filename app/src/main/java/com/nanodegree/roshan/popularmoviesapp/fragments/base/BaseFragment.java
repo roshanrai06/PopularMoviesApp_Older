@@ -56,16 +56,18 @@ public abstract class BaseFragment<E extends BaseFragment.BaseFragmentListener> 
         public void restorePreviousActionBarColors(int color);
     }
 
-   	protected void dismissKeyboard(View viewHoldingKeyboardForum) {
-		getCallback().dismissKeyboard(viewHoldingKeyboardForum);
-	}
+    protected void dismissKeyboard(View viewHoldingKeyboardForum) {
+        getCallback().dismissKeyboard(viewHoldingKeyboardForum);
+    }
 
-	protected void showKeyboard(EditText editText) {
-		getCallback().showKeyboard(editText);
-	}
-  public void showToast(String message) {
-		getCallback().showToast(message);
-	}
+    protected void showKeyboard(EditText editText) {
+        getCallback().showKeyboard(editText);
+    }
+
+    public void showToast(String message) {
+        getCallback().showToast(message);
+    }
+
     public E getCallback() {
         return mCallback;
     }
@@ -96,7 +98,7 @@ public abstract class BaseFragment<E extends BaseFragment.BaseFragmentListener> 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(getLayout(), container, false);
-         ButterKnife.bind(this, rootView);
+        ButterKnife.bind(this, rootView);
         onInitFragment(rootView, savedInstanceState);
 
 

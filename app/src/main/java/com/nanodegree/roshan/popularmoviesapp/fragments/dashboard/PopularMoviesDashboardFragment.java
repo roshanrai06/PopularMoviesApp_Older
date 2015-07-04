@@ -8,6 +8,8 @@ import com.nanodegree.roshan.popularmoviesapp.R;
 import com.nanodegree.roshan.popularmoviesapp.adapters.ImageAdapter;
 import com.nanodegree.roshan.popularmoviesapp.fragments.base.PopularMoviesBaseFragment;
 
+import java.util.ArrayList;
+
 import butterknife.Bind;
 
 public class PopularMoviesDashboardFragment extends PopularMoviesBaseFragment<PopularMoviesDashboardFragment.PopularMoviesDashboardFragmentListener> {
@@ -16,12 +18,19 @@ public class PopularMoviesDashboardFragment extends PopularMoviesBaseFragment<Po
     public static String FRAGMENT_TAG = "PopularMoviesDashboardFragment";
     @Bind(R.id.gridview)
     protected GridView gridview;
+    ArrayList<String> items;
 
-    public static PopularMoviesDashboardFragment newInstance() {
+
+    public static PopularMoviesDashboardFragment newInstance(Bundle args) {
         PopularMoviesDashboardFragment fragment = new PopularMoviesDashboardFragment();
-        Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
+    }
+
+
+    @Override
+    protected boolean requestDisplayHomeAsUpEnabled() {
+        return false;
     }
 
     @Override
@@ -42,7 +51,8 @@ public class PopularMoviesDashboardFragment extends PopularMoviesBaseFragment<Po
 
     @Override
     public View onInitFragment(View rootView, Bundle savedInstanceState) {
-        gridview.setAdapter(new ImageAdapter(getActivity()));
+        items = getArguments().getStringArrayList("movie_list");
+        gridview.setAdapter(new ImageAdapter(getActivity(), items));
         return rootView;
     }
 
@@ -54,7 +64,7 @@ public class PopularMoviesDashboardFragment extends PopularMoviesBaseFragment<Po
 
     @Override
     public int getFragmentTitleResource() {
-        return R.string.hello_blank_fragment;
+        return R.string.popular_movies_fragment_title;
     }
 
 

@@ -12,7 +12,7 @@ public abstract class PopularMoviesBaseFragment<E extends PopularMoviesBaseFragm
         super.onStart();
         getCallback().onSuggestActionBar(suggestShowActionBar());
         getCallback().onSuggestShowAvailableBalance(showAvailableBalance());
-        getCallback().allowViewToScroll(allowViewToScroll());
+       
     }
 
     /**
@@ -76,11 +76,6 @@ public abstract class PopularMoviesBaseFragment<E extends PopularMoviesBaseFragm
          */
         public void onSuggestShowAvailableBalance(boolean show);
 
-        /**
-         * Suggested view to be scrollable
-         *
-         * @param allowViewToScroll
-         */
-        public void allowViewToScroll(boolean allowViewToScroll);
+
     }
 }
