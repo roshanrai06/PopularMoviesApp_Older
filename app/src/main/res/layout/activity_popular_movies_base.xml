@@ -1,71 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:platresize="http://schemas.android.com/apk/res-auto"
     android:id="@+id/master_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="horizontal">
 
-    <RelativeLayout
-        android:id="@+id/balanceHeader"
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:background="#F2F2F2"
-        android:orientation="horizontal"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:visibility="gone">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/common_accountbalance_label_title"
-
+        <ProgressBar
+            android:id="@+id/common_loading_display"
+            style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:gravity="center_vertical|left"
-            android:text="Available Balance"
-            android:textColor="#4D4F53" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+    </FrameLayout>
 
-        <TextView
-            android:id="@+id/common_accountbalance_label_amount"
-
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:gravity="center_vertical|left"
-            android:textColor="#4D4F53" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#F2F2F2" />
-    </RelativeLayout>
-
-    <RelativeLayout
+    <FrameLayout
+        android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/balanceHeader"
-        android:gravity="center">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ProgressBar
-                android:id="@+id/common_loading_display"
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:visibility="gone" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/content_frame"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </RelativeLayout>
+        android:layout_height="match_parent" />
 
 
 </RelativeLayout>

@@ -9,10 +9,6 @@ public interface BaseActionFragmentInterface {
      */
     void onBackClicked();
 
-    /**
-     * Activity will call this if it want to ask the fragment for navigation advice
-     */
-    void onHomeLogoClick();
 
     /**
      * Suggested ActionBar title resource

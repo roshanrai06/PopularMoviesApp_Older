@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.nanodegree.roshan.popularmoviesapp.fragments.base.PopularMoviesBaseFragment;
 import com.nineoldandroids.animation.AnimatorSet;
@@ -19,19 +18,13 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class PopularMoviesBaseActivity extends BaseActionActivity implements PopularMoviesBaseFragment.PopularMoviesBaseFragmentListener, FragmentManager.OnBackStackChangedListener {
-    private static final String SAVE_SHOWING_HEADER = "SAVE_SHOWING_HEADER";
     private final int ANIMATION_TRANSITION_DURATION = 500;
-    private final int ANIMATION_ROTATION_AMT = 0;// -2;
     protected boolean mLoadingDisplay = false;
-    private boolean mShowingHeader = false;
     private AnimatorSet mAnimSet;
-
     @Bind(R.id.common_loading_display)
     protected ProgressBar mProgressBar;
     @Bind(R.id.content_frame)
     protected FrameLayout mContent;
-    @Bind(R.id.balanceHeader)
-    protected View mBalanceHeader;
 
 
     @Override
@@ -43,70 +36,20 @@ public class PopularMoviesBaseActivity extends BaseActionActivity implements Pop
         ButterKnife.bind(this);
 
 
-        if (savedInstanceState != null) {
-            if (savedInstanceState.containsKey(SAVE_SHOWING_HEADER)) {
-                mShowingHeader = savedInstanceState.getBoolean(SAVE_SHOWING_HEADER, false);
-                if (mShowingHeader) {
-                    showBalanceHeader();
-                } else {
-                    hideBalanceHeader();
-                }
-            }
-        }
     }
 
     /**
      * Default action bar initialization
      */
     protected void setupActionBar() {
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);// enables home up and shows arrow
-        getSupportActionBar().setDisplayShowHomeEnabled(false);// shows logo
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putBoolean(SAVE_SHOWING_HEADER, mShowingHeader);
-    }
-
-    protected String getBalanceHeaderString() {
-        String balanceHeaderString = "73";
-
-        return balanceHeaderString;
-    }
-
-    /**
-     * To show the balance header
-     */
-    private void showBalanceHeader() {
-        showBalanceHeader(getBalanceHeaderString());
-    }
-
-    /**
-     * To show the balance header
-     *
-     * @param display
-     */
-    private void showBalanceHeader(String display) {
-        if (mBalanceHeader != null && mBalanceHeader.getVisibility() != View.VISIBLE) {
-            mBalanceHeader.setVisibility(View.VISIBLE);
-            ((TextView) findViewById(R.id.common_accountbalance_label_amount)).setText(display);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);// enables home up and shows arrow
+            getSupportActionBar().setDisplayShowHomeEnabled(false);// shows logo
         }
+
     }
 
-    /**
-     * To hide the balance header
-     */
-    private void hideBalanceHeader() {
-        if (mBalanceHeader != null && mBalanceHeader.getVisibility() != View.GONE)
-            mBalanceHeader.setVisibility(View.GONE);
-    }
-
-    @Override
-    protected View getContentView() {
-        return mContent;
-    }
 
     @Override
     protected int getFragmentContentFrameResourceID() {
@@ -115,19 +58,12 @@ public class PopularMoviesBaseActivity extends BaseActionActivity implements Pop
 
     @Override
     public void onSuggestActionBar(boolean show) {
-        if (!getSupportActionBar().isShowing() && show) {
-            getSupportActionBar().show();
-        } else if (getSupportActionBar().isShowing() && !show) {
-            getSupportActionBar().hide();
-        }
-    }
-
-    @Override
-    public void onSuggestShowAvailableBalance(boolean show) {
-        if (show) {
-            showBalanceHeader();
-        } else {
-            hideBalanceHeader();
+        if (getSupportActionBar() != null) {
+            if (!getSupportActionBar().isShowing() && show) {
+                getSupportActionBar().show();
+            } else if (getSupportActionBar().isShowing() && !show) {
+                getSupportActionBar().hide();
+            }
         }
     }
 
@@ -157,12 +93,11 @@ public class PopularMoviesBaseActivity extends BaseActionActivity implements Pop
             return;
         mProgressBar.setVisibility(View.INVISIBLE);
         mLoadingDisplay = false;
-        // setRequestedOrientation(mLastRequestedOrientation);
         mAnimSet = new AnimatorSet();
-        mAnimSet.playTogether(ObjectAnimator.ofFloat(mContent, "alpha", 0.5f, 1.0f)// ,
-                // ObjectAnimator.ofFloat(mContent, "rotationY", ANIMATION_ROTATION_AMT, 0)
+        mAnimSet.playTogether(ObjectAnimator.ofFloat(mContent, "alpha", 0.5f, 1.0f),
+                ObjectAnimator.ofFloat(mContent, "rotationY", 0, 0)
         );
-        //unLockOrientation();
+
         unlockTouchInput();
         mAnimSet.setDuration(ANIMATION_TRANSITION_DURATION).start();
     }
@@ -180,31 +115,6 @@ public class PopularMoviesBaseActivity extends BaseActionActivity implements Pop
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
 
-
-    /**
-     * Action flow transition called before fragment swapping
-     *
-     * @param reverse
-     */
-
-    private void startTransitionDisplay(boolean reverse) {
-        mAnimSet = new AnimatorSet();
-        mAnimSet.playTogether(ObjectAnimator.ofFloat(mContent, "rotationY", 0, reverse ? ANIMATION_ROTATION_AMT * -1 : ANIMATION_ROTATION_AMT));
-        mAnimSet.setDuration(ANIMATION_TRANSITION_DURATION).start();
-    }
-
-
-    /**
-     * Action flow transition called after fragment swapping
-     *
-     * @param reverse
-     */
-
-    private void stopTransitionDisplay(boolean reverse) {
-        mAnimSet = new AnimatorSet();
-        mAnimSet.playTogether(ObjectAnimator.ofFloat(mContent, "rotationY", reverse ? ANIMATION_ROTATION_AMT * -1 : ANIMATION_ROTATION_AMT, 0));
-        mAnimSet.setDuration(ANIMATION_TRANSITION_DURATION).start();
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

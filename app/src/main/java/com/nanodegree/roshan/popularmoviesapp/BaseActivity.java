@@ -1,25 +1,19 @@
 package com.nanodegree.roshan.popularmoviesapp;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.IBinder;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 
 import com.nanodegree.roshan.popularmoviesapp.fragments.base.BaseFragment;
 import com.nanodegree.roshan.popularmoviesapp.interfaces.BaseFragmentInterface;
 
-public abstract class BaseActivity extends AppCompatActivity implements BaseFragment.BaseFragmentListener{
+public abstract class BaseActivity extends AppCompatActivity implements BaseFragment.BaseFragmentListener {
 
     protected Handler mHandler = new Handler(Looper.getMainLooper());
 
@@ -30,40 +24,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseFrag
 
     }
 
-    @Override
-    public void dismissKeyboard(View viewHoldingKeyboardForum) {
-        if (viewHoldingKeyboardForum == null)
-            return;
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        IBinder token = viewHoldingKeyboardForum.getWindowToken();
-        if (token != null)
-            imm.hideSoftInputFromWindow(token, 0);
-    }
-
-    @Override
-    public void showKeyboard(final EditText editText) {
-           mHandler.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-				imm.showSoftInput(editText, InputMethodManager.SHOW_FORCED);
-			}
-		}, 500);
-
-    }
 
     @Override
     public void showToast(String message) {
 
     }
 
-
-    @Override
-    public void restorePreviousActionBarColors(int color) {
-        if (color == -1)
-            return;
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(color));
-    }
 
     protected void launchFragment(final Fragment fragment, final int fragmentReplaceId, final int animationIn, final int animationOut, final int popAnimationIn, final int popAnimationOut) {
         handleLaunchFragment(fragment, fragmentReplaceId, animationIn, animationOut, popAnimationIn, popAnimationOut);

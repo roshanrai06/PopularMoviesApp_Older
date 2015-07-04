@@ -3,7 +3,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+
     <string name="popular_movies_fragment_title">Popular Movies</string>
     <string name="title_activity_base_action_activty">BaseActionActivty</string>
     <string name="title_activity_popular_movies_base">PopularMoviesBaseActivity</string>
@@ -14,5 +14,28 @@
     <string name="base_url">http://api.themoviedb.org/3</string>
     <string name="image_base_url">http://image.tmdb.org/t/p/w185/</string>
     <string name="api_key">c0bb908a2d5205db7c1b0202b8d24dda</string>
+
+
+    <string name="common_error_fragment_message">Sorry Something went wrong.Please check your internet connection and try again.</string>
+    <string name="error_fragment_title">Error</string>
+
+    <string name="retry_fragment_button">Retry</string>
+
+    <string name="pref_sort_title">Sorting preference</string>
+    <string-array name="pref_sort_entry_values">
+        <item>popularity.desc</item>
+        <item>vote_average.desc</item>
+        <item>revenue.desc</item>
+    </string-array>
+    <string-array name="pref_sort_entries">
+        <item>By Popularity</item>
+        <item>By Rating</item>
+        <item>By Revenue</item>
+    </string-array>
+    <color name="red">#ff0000</color>
+    <string name="pref_sort_default_value">popularity.desc</string>
+
+    <string name="title_activity_settings">Settings</string>
+
 
 </resources>

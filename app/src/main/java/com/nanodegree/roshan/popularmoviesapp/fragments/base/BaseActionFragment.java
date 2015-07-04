@@ -48,22 +48,19 @@ public abstract class BaseActionFragment<E extends BaseActionFragment.BaseAction
         /**
          * Suggested ActionBar display to activity
          */
-         void onRequestDisplayHomeAsUpEnabled(boolean value);
+        void onRequestDisplayHomeAsUpEnabled(boolean value);
 
         /**
          * Suggested ActionBar display to activity
          */
-         void onRequestDisplayShowHomeEnabled(boolean value);
+        void onRequestDisplayShowHomeEnabled(boolean value);
 
         /**
          * Suggested ActionBar title display
          */
         void onRequestTitleUpdate(int titleResource);
 
-        /**
-         * Suggested ActionBar title display
-         */
-         void onRequestTitleUpdate(String titleResource);
+        
     }
 
     @Override
@@ -74,8 +71,5 @@ public abstract class BaseActionFragment<E extends BaseActionFragment.BaseAction
 
     }
 
-    @Override
-    public void onHomeLogoClick() {
 
-    }
 }

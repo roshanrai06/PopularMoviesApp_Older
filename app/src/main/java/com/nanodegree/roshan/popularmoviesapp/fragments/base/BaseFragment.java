@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import com.nanodegree.roshan.popularmoviesapp.BaseActivity;
 import com.nanodegree.roshan.popularmoviesapp.interfaces.BaseFragmentInterface;
@@ -46,23 +45,15 @@ public abstract class BaseFragment<E extends BaseFragment.BaseFragmentListener> 
     }
 
     public interface BaseFragmentListener {
-        public void dismissKeyboard(View viewHoldingKeyboardForum);
-
-        public void showKeyboard(EditText editText);
 
 
-        public void showToast(String message);
 
-        public void restorePreviousActionBarColors(int color);
+        void showToast(String message);
+
+
     }
 
-    protected void dismissKeyboard(View viewHoldingKeyboardForum) {
-        getCallback().dismissKeyboard(viewHoldingKeyboardForum);
-    }
 
-    protected void showKeyboard(EditText editText) {
-        getCallback().showKeyboard(editText);
-    }
 
     public void showToast(String message) {
         getCallback().showToast(message);
