@@ -27,6 +27,8 @@ import retrofit.client.Response;
 public class PopularMoviesDashboardActivity extends PopularMoviesBaseActivity implements PopularMoviesDashboardFragment.PopularMoviesDashboardFragmentListener, PopularMoviesDetailsFragment.PopularMoviesDetailsFragmentListener, CommonErrorFragment.CommonErrorFragmentListener {
     public final String movie_list = "movie_list";
     ArrayList<String> mPosterPaths;
+    public final String sort_by = "sort_by";
+    private String mSortingPreference;
     private static final String TAG = PopularMoviesDashboardActivity.class.getName();
 
     @Override
@@ -41,17 +43,20 @@ public class PopularMoviesDashboardActivity extends PopularMoviesBaseActivity im
 
     @Override
     protected void setupActionBar() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+        }
     }
 
     private void requestMoviesDetails() {
         RestAdapter restAdapter;
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String sort_by = sharedPref.getString(getString(R.string.pref_sort_title), getString(R.string.pref_sort_default_value));
+        mSortingPreference = sharedPref.getString(getString(R.string.pref_sort_title), getString(R.string.pref_sort_default_value));
         restAdapter = new RestAdapter.Builder().setEndpoint(getString(R.string.base_url)).build();
         MoviesAPI moviesAPI = restAdapter.create(MoviesAPI.class);
         showLoadingDisplay();
-        moviesAPI.getMovieList(sort_by, getString(R.string.api_key), new Callback<GetMoviesResponse>() {
+        moviesAPI.getMovieList(mSortingPreference, getString(R.string.api_key), new Callback<GetMoviesResponse>() {
             @Override
             public void success(GetMoviesResponse moviesResponse, Response response) {
                 hideLoadingDisplay();
@@ -63,6 +68,7 @@ public class PopularMoviesDashboardActivity extends PopularMoviesBaseActivity im
                     mPosterPaths.add(moviesResult.getPosterPath());
                 }
                 Bundle args = new Bundle();
+                args.putString(sort_by, mSortingPreference);
                 args.putStringArrayList(movie_list, mPosterPaths);
                 launchFragment(PopularMoviesDashboardFragment.newInstance(args));
             }

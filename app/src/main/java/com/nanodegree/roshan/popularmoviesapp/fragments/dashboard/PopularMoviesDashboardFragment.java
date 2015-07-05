@@ -64,7 +64,27 @@ public class PopularMoviesDashboardFragment extends PopularMoviesBaseFragment<Po
 
     @Override
     public int getFragmentTitleResource() {
-        return R.string.popular_movies_fragment_title;
+
+        return getTypeOfStringTitle((getArguments().getString("sort_by")));
+    }
+
+    private int getTypeOfStringTitle(String title) {
+        int typeOfTitle;
+        switch (title) {
+            case "popularity.desc":
+                typeOfTitle = R.string.popular_movies_fragment_title;
+                break;
+            case "vote_average.desc":
+                typeOfTitle = R.string.popular_movies_fragment_title_by_ratings;
+                break;
+            case "revenue.desc":
+                typeOfTitle = R.string.popular_movies_fragment_title_by_revenue;
+                break;
+
+            default:
+                typeOfTitle = R.string.popular_movies_fragment_title;
+        }
+        return typeOfTitle;
     }
 
 
