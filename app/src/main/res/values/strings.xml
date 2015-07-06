@@ -50,6 +50,8 @@
     <string name="reviews">Reviews</string>
     <string name="rating">Rating :</string>
     <string name="release_date">Release Date :</string>
+    <string name="na">N/A</string>
+
 
 
 </resources>

@@ -56,16 +56,17 @@
                 android:paddingTop="10dp" />
 
 
+            <Button
+                android:id="@+id/button_trailer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/youtubeRed"
+                android:text="@string/view_trailer"
+                android:textColor="@color/white"
+                android:visibility="gone" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/button_trailer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@color/youtubeRed"
-            android:text="@string/view_trailer"
-            android:textColor="@color/white" />
     </LinearLayout>
 
 

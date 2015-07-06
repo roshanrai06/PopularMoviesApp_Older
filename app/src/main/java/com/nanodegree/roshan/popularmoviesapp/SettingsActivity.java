@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 
 public class SettingsActivity extends PreferenceActivity implements Preference.OnPreferenceChangeListener {
+    private boolean isPreferenceChanged = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             // For other preferences, set the summary to the value's simple string representation.
             preference.setSummary(stringValue);
         }
+        isPreferenceChanged = true;
         return true;
     }
 
@@ -79,8 +81,12 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         bar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (isPreferenceChanged) {
+                    callDashboardActivity();
+                }else{
+                    finish();
+                }
 
-                callDashboardActivity();
             }
         });
     }

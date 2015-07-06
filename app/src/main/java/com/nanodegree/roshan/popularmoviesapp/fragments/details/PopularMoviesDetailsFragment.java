@@ -1,6 +1,5 @@
 package com.nanodegree.roshan.popularmoviesapp.fragments.details;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -49,7 +48,13 @@ public class PopularMoviesDetailsFragment extends PopularMoviesBaseFragment<Popu
         mMovieTitle.setText(mMoviesResults.getTitle());
         mMovieRating.setText(getResources().getString(R.string.rating) + mMoviesResults.getVoteAverage().toString());
         mMovieOverview.setText(mMoviesResults.getOverview());
-        mMovieRelease.setText(getResources().getString(R.string.release_date) + mMoviesResults.getReleaseDate());
+        if (mMoviesResults.getReleaseDate() != null) {
+            mMovieRelease.setText(getResources().getString(R.string.release_date) + mMoviesResults.getReleaseDate());
+
+        } else {
+            mMovieRelease.setText(getResources().getString(R.string.release_date) + getResources().getString(R.string.na));
+
+        }
 
 
         Picasso.with(getActivity()).load((ImagePathUtil.getMovieImageBackDropPath(getActivity(), mMoviesResults.getBackdropPath()))).into(mBackDropImageView);
@@ -78,12 +83,6 @@ public class PopularMoviesDetailsFragment extends PopularMoviesBaseFragment<Popu
     }
 
 
-    public void onButtonPressed(Uri uri) {
-
-        getCallback().onFragmentInteraction(uri);
-
-    }
-
     @Override
     public String getFragmentTag() {
         return FRAGMENT_TAG;
@@ -92,7 +91,7 @@ public class PopularMoviesDetailsFragment extends PopularMoviesBaseFragment<Popu
 
     public interface PopularMoviesDetailsFragmentListener extends PopularMoviesBaseFragment.PopularMoviesBaseFragmentListener {
 
-        void onFragmentInteraction(Uri uri);
+        // void onFragmentPlayTrailer(Uri uri);
     }
 
 }
