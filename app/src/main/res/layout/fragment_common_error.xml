@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
 
-    android:background="#FFFFFF">
+    android:background="@android:color/white">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -15,15 +15,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/fragment_common_margin"
             android:src="@drawable/sad_face_image" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:layout_marginLeft="@dimen/abc_action_bar_default_height_material"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginRight="@dimen/fragment_common_margin"
+            android:layout_marginTop="@dimen/fragment_common_margin"
             android:text="@string/common_error_fragment_message" />
 
         <Button
@@ -32,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/fragment_common_margin"
             android:text="@string/retry_fragment_button" />
 
 

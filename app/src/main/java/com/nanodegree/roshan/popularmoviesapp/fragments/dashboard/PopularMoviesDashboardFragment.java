@@ -2,6 +2,7 @@ package com.nanodegree.roshan.popularmoviesapp.fragments.dashboard;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.nanodegree.roshan.popularmoviesapp.R;
@@ -53,6 +54,12 @@ public class PopularMoviesDashboardFragment extends PopularMoviesBaseFragment<Po
     public View onInitFragment(View rootView, Bundle savedInstanceState) {
         items = getArguments().getStringArrayList("movie_list");
         gridview.setAdapter(new ImageAdapter(getActivity(), items));
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                getCallback().onMoviePosterClicked(position);
+            }
+        });
         return rootView;
     }
 
@@ -90,7 +97,7 @@ public class PopularMoviesDashboardFragment extends PopularMoviesBaseFragment<Po
 
     public interface PopularMoviesDashboardFragmentListener extends PopularMoviesBaseFragment.PopularMoviesBaseFragmentListener {
 
-        void onDashboardButtonClicked();
+        void onMoviePosterClicked(int position);
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.nanodegree.roshan.popularmoviesapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -11,7 +10,6 @@ import android.view.MenuItem;
 
 import com.nanodegree.roshan.popularmoviesapp.fragments.common.CommonErrorFragment;
 import com.nanodegree.roshan.popularmoviesapp.fragments.dashboard.PopularMoviesDashboardFragment;
-import com.nanodegree.roshan.popularmoviesapp.fragments.details.PopularMoviesDetailsFragment;
 import com.nanodegree.roshan.popularmoviesapp.model.GetMoviesResponse;
 import com.nanodegree.roshan.popularmoviesapp.model.MoviesResults;
 import com.nanodegree.roshan.popularmoviesapp.movieapi.MoviesAPI;
@@ -24,11 +22,14 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class PopularMoviesDashboardActivity extends PopularMoviesBaseActivity implements PopularMoviesDashboardFragment.PopularMoviesDashboardFragmentListener, PopularMoviesDetailsFragment.PopularMoviesDetailsFragmentListener, CommonErrorFragment.CommonErrorFragmentListener {
+public class PopularMoviesDashboardActivity extends PopularMoviesBaseActivity implements PopularMoviesDashboardFragment.PopularMoviesDashboardFragmentListener, CommonErrorFragment.CommonErrorFragmentListener {
     public final String movie_list = "movie_list";
     ArrayList<String> mPosterPaths;
     public final String sort_by = "sort_by";
+    public final String movie_result = "movie_result";
+
     private String mSortingPreference;
+    private List<MoviesResults> mMoviesResults;
     private static final String TAG = PopularMoviesDashboardActivity.class.getName();
 
     @Override
@@ -60,11 +61,11 @@ public class PopularMoviesDashboardActivity extends PopularMoviesBaseActivity im
             @Override
             public void success(GetMoviesResponse moviesResponse, Response response) {
                 hideLoadingDisplay();
-                final List<MoviesResults> results = moviesResponse.getMoviesResults();
+                mMoviesResults = moviesResponse.getMoviesResults();
                 Log.d(TAG, "" + moviesResponse.getMoviesResults().size());
                 mPosterPaths = new ArrayList<>();
-                for (int i = 0; i < moviesResponse.getMoviesResults().size(); i++) {
-                    MoviesResults moviesResult = results.get(i);
+                for (int i = 0; i < mMoviesResults.size(); i++) {
+                    MoviesResults moviesResult = mMoviesResults.get(i);
                     mPosterPaths.add(moviesResult.getPosterPath());
                 }
                 Bundle args = new Bundle();
@@ -82,17 +83,6 @@ public class PopularMoviesDashboardActivity extends PopularMoviesBaseActivity im
         });
     }
 
-
-    @Override
-    public void onDashboardButtonClicked() {
-        launchFragment(PopularMoviesDetailsFragment.newInstance());
-
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -115,7 +105,20 @@ public class PopularMoviesDashboardActivity extends PopularMoviesBaseActivity im
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
     public void onRetryButtonClicked() {
         requestMoviesDetails();
+    }
+
+    @Override
+    public void onMoviePosterClicked(int position) {
+        Intent intent = new Intent(this, PopularMoviesDetailsActivity.class);
+        intent.putExtra(movie_result, mMoviesResults.get(position));
+        startActivity(intent);
+
     }
 }

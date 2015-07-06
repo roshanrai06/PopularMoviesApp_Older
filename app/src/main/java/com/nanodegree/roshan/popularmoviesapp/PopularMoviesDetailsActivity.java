@@ -1,13 +1,27 @@
 package com.nanodegree.roshan.popularmoviesapp;
 
 import android.os.Bundle;
+import android.view.Menu;
+
+import com.nanodegree.roshan.popularmoviesapp.fragments.details.PopularMoviesDetailsFragment;
 
 public class PopularMoviesDetailsActivity extends PopularMoviesBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // setContentView(R.layout.activity_popular_movies_details);
+        if (savedInstanceState == null) {
+            Bundle args = getIntent().getExtras();
+            args.getParcelable("movie_result");
+            launchFragment(PopularMoviesDetailsFragment.newInstance(args));
+
+        }
+
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        return false;
     }
 
 

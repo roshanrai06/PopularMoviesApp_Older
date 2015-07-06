@@ -3,29 +3,59 @@ package com.nanodegree.roshan.popularmoviesapp.fragments.details;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.nanodegree.roshan.popularmoviesapp.R;
 import com.nanodegree.roshan.popularmoviesapp.fragments.base.PopularMoviesBaseFragment;
+import com.nanodegree.roshan.popularmoviesapp.model.MoviesResults;
+import com.nanodegree.roshan.popularmoviesapp.utils.ImagePathUtil;
+import com.squareup.picasso.Picasso;
+
+import butterknife.Bind;
 
 
 public class PopularMoviesDetailsFragment extends PopularMoviesBaseFragment<PopularMoviesDetailsFragment.PopularMoviesDetailsFragmentListener> {
 
     public static String FRAGMENT_TAG = "PopularMoviesDetailsFragment";
+    @Bind(R.id.movie_title)
+    TextView mMovieTitle;
+    @Bind(R.id.movie_rating)
+    TextView mMovieRating;
+    @Bind(R.id.movie_overview)
+    TextView mMovieOverview;
+    @Bind(R.id.movie_release_date)
+    TextView mMovieRelease;
+    @Bind(R.id.movie_backdrop_image)
+    ImageView mBackDropImageView;
+    @Bind(R.id.movie_poster)
+    ImageView mPosterImageView;
+    MoviesResults mMoviesResults;
 
-
-    public static PopularMoviesDetailsFragment newInstance() {
+    public static PopularMoviesDetailsFragment newInstance(Bundle args) {
         PopularMoviesDetailsFragment fragment = new PopularMoviesDetailsFragment();
-        Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
     }
 
+
     public PopularMoviesDetailsFragment() {
-        // Required empty public constructor
     }
 
     @Override
     public View onInitFragment(View rootView, Bundle savedInstanceState) {
+
+
+        mMovieTitle.setText(mMoviesResults.getTitle());
+        mMovieRating.setText(getResources().getString(R.string.rating) + mMoviesResults.getVoteAverage().toString());
+        mMovieOverview.setText(mMoviesResults.getOverview());
+        mMovieRelease.setText(getResources().getString(R.string.release_date) + mMoviesResults.getReleaseDate());
+
+
+        Picasso.with(getActivity()).load((ImagePathUtil.getMovieImageBackDropPath(getActivity(), mMoviesResults.getBackdropPath()))).into(mBackDropImageView);
+        Picasso.with(getActivity()).load((ImagePathUtil.getMovieImagePosterPath(getActivity(), mMoviesResults.getPosterPath()))).into(mPosterImageView);
+
+
         return rootView;
     }
 
@@ -37,6 +67,8 @@ public class PopularMoviesDetailsFragment extends PopularMoviesBaseFragment<Popu
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(false);
+        mMoviesResults = getArguments().getParcelable("movie_result");
 
     }
 
@@ -46,7 +78,6 @@ public class PopularMoviesDetailsFragment extends PopularMoviesBaseFragment<Popu
     }
 
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
 
         getCallback().onFragmentInteraction(uri);
@@ -61,7 +92,7 @@ public class PopularMoviesDetailsFragment extends PopularMoviesBaseFragment<Popu
 
     public interface PopularMoviesDetailsFragmentListener extends PopularMoviesBaseFragment.PopularMoviesBaseFragmentListener {
 
-         void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(Uri uri);
     }
 
 }

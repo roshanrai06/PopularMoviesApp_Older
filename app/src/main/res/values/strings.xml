@@ -12,13 +12,18 @@
     <string name="title_activity_popular_movies_base">PopularMoviesBaseActivity</string>
     <string name="title_activity_movies_dashboard">MoviesDashboardActivity</string>
     <string name="title_activity_popular_movies_details">PopularMoviesDetailsActivity</string>
-    <string name="title_fragment_popular_movies_details">PopularMoviesDetailsFragment</string>
+    <string name="title_fragment_popular_movies_details">MoviesDetails</string>
 
     <string name="base_url">http://api.themoviedb.org/3</string>
-    <string name="image_base_url">http://image.tmdb.org/t/p/w185/</string>
+    <string name="image_base_url_low">http://image.tmdb.org/t/p/w92/</string>
     <string name="api_key">c0bb908a2d5205db7c1b0202b8d24dda</string>
+    <string name="image_base_url_normal">http://image.tmdb.org/t/p/w185/</string>
+    <string name="image_base_url_high">http://image.tmdb.org/t/p/w342/</string>
+    <string name="image_base_url_high_500">http://image.tmdb.org/t/p/w500/</string>
+    <string name="image_base_url_high_780">http://image.tmdb.org/t/p/w780/</string>
 
 
+    <string name="label_movie_release_date">Release date:</string>
     <string name="common_error_fragment_message">Sorry Something went wrong.Please check your internet connection and try again.</string>
     <string name="error_fragment_title">Error</string>
 
@@ -39,6 +44,12 @@
     <string name="pref_sort_default_value">popularity.desc</string>
 
     <string name="title_activity_settings">Settings</string>
+
+    <string name="desc">Image Description</string>
+    <string name="view_trailer">View Trailer</string>
+    <string name="reviews">Reviews</string>
+    <string name="rating">Rating :</string>
+    <string name="release_date">Release Date :</string>
 
 
 </resources>
