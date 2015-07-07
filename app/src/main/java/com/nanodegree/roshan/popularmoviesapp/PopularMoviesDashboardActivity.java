@@ -82,7 +82,17 @@ public class PopularMoviesDashboardActivity extends PopularMoviesBaseActivity im
             }
         });
     }
+ @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList(movie_result, (ArrayList<? extends Parcelable>) mMoviesResults);
+        super.onSaveInstanceState(outState);
+    }
 
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        mMoviesResults = savedInstanceState.getParcelableArrayList(movie_result);
+        super.onRestoreInstanceState(savedInstanceState);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
