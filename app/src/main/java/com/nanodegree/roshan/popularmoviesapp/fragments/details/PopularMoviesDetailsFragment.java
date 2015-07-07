@@ -45,9 +45,20 @@ public class PopularMoviesDetailsFragment extends PopularMoviesBaseFragment<Popu
     public View onInitFragment(View rootView, Bundle savedInstanceState) {
 
 
-        mMovieTitle.setText(mMoviesResults.getTitle());
-        mMovieRating.setText(getResources().getString(R.string.rating) + mMoviesResults.getVoteAverage().toString());
-        mMovieOverview.setText(mMoviesResults.getOverview());
+         mMovieTitle.setText(mMoviesResults.getTitle());
+
+        if (mMoviesResults.getVoteAverage() != null) {
+            mMovieRating.setText(getResources().getString(R.string.rating) + mMoviesResults.getVoteAverage().toString());
+
+        } else {
+            mMovieRating.setText(getResources().getString(R.string.rating) + getResources().getString(R.string.na));
+        }
+        if ((mMoviesResults.getOverview() != null)) {
+            mMovieOverview.setText(mMoviesResults.getOverview());
+        } else {
+            mMovieOverview.setText(getResources().getString(R.string.na));
+        }
+
         if (mMoviesResults.getReleaseDate() != null) {
             mMovieRelease.setText(getResources().getString(R.string.release_date) + mMoviesResults.getReleaseDate());
 
@@ -55,10 +66,9 @@ public class PopularMoviesDetailsFragment extends PopularMoviesBaseFragment<Popu
             mMovieRelease.setText(getResources().getString(R.string.release_date) + getResources().getString(R.string.na));
 
         }
-
-
-        Picasso.with(getActivity()).load((ImagePathUtil.getMovieImageBackDropPath(getActivity(), mMoviesResults.getBackdropPath()))).into(mBackDropImageView);
+     Picasso.with(getActivity()).load((ImagePathUtil.getMovieImageBackDropPath(getActivity(), mMoviesResults.getBackdropPath()))).into(mBackDropImageView);
         Picasso.with(getActivity()).load((ImagePathUtil.getMovieImagePosterPath(getActivity(), mMoviesResults.getPosterPath()))).into(mPosterImageView);
+
 
 
         return rootView;
