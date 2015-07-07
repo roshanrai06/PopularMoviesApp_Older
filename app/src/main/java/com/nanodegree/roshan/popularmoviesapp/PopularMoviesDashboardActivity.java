@@ -3,7 +3,9 @@ package com.nanodegree.roshan.popularmoviesapp;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -82,7 +84,8 @@ public class PopularMoviesDashboardActivity extends PopularMoviesBaseActivity im
             }
         });
     }
- @Override
+
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putParcelableArrayList(movie_result, (ArrayList<? extends Parcelable>) mMoviesResults);
         super.onSaveInstanceState(outState);

@@ -1,6 +1,8 @@
 package com.nanodegree.roshan.popularmoviesapp;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -9,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 import com.nanodegree.roshan.popularmoviesapp.fragments.base.BaseFragment;
 import com.nanodegree.roshan.popularmoviesapp.interfaces.BaseFragmentInterface;
@@ -80,6 +83,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseFrag
         super.startActivityForResult(intent, requestCode);
         overridePendingTransition(getTransitionIn(), getTransitionOut());
     }
+
     /**
      * Suggested to lock the orientation of the screen
      */
@@ -126,6 +130,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseFrag
     protected void lockTouchInput() {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

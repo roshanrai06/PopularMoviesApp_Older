@@ -1,7 +1,6 @@
 package com.nanodegree.roshan.popularmoviesapp;
 
 
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.view.Menu;
@@ -82,12 +81,10 @@ public class PopularMoviesBaseActivity extends BaseActionActivity implements Pop
         mAnimSet.playTogether(ObjectAnimator.ofFloat(mContent, "alpha", 1.0f, 0.5f));
         mAnimSet.setDuration(ANIMATION_TRANSITION_DURATION).start();
         lockOrientation();
+        lockTouchInput();
 
     }
 
-    private void lockOrientation() {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-    }
 
     /**
      * Hide activity loading display
@@ -108,9 +105,6 @@ public class PopularMoviesBaseActivity extends BaseActionActivity implements Pop
         mAnimSet.setDuration(ANIMATION_TRANSITION_DURATION).start();
     }
 
-    private void unLockOrientation() {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
