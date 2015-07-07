@@ -19,21 +19,21 @@
             android:id="@+id/movie_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="@dimen/common_dp_10"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:id="@+id/movie_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="@dimen/common_dp_10"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/movie_release_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="@dimen/common_dp_10"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -46,21 +46,21 @@
                 android:layout_width="80dp"
                 android:layout_height="120dp"
                 android:contentDescription="@string/desc"
-                android:paddingTop="10dp" />
+                android:paddingTop="@dimen/common_dp_10" />
 
             <TextView
                 android:id="@+id/movie_overview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:paddingTop="10dp" />
-
+                android:padding="@dimen/common_dp_10"
+                android:paddingTop="@dimen/common_dp_10" />
+            <!--TODO View trailer button will be added in second stage of app.Under implementation-->
 
             <Button
                 android:id="@+id/button_trailer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/common_dp_20"
                 android:background="@color/youtubeRed"
                 android:text="@string/view_trailer"
                 android:textColor="@color/white"

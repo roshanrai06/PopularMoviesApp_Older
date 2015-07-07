@@ -16,13 +16,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/fragment_common_margin"
+            android:contentDescription="@string/desc"
             android:src="@drawable/sad_face_image" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:layout_marginLeft="@dimen/abc_action_bar_default_height_material"
+            android:layout_margin="@dimen/abc_action_bar_default_height_material"
             android:layout_marginRight="@dimen/fragment_common_margin"
             android:layout_marginTop="@dimen/fragment_common_margin"
             android:text="@string/common_error_fragment_message" />

@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.nanodegree.roshan.popularmoviesapp.R;
 import com.nanodegree.roshan.popularmoviesapp.utils.ImagePathUtil;
 import com.squareup.picasso.Picasso;
 
@@ -48,7 +49,7 @@ public class ImageAdapter extends BaseAdapter {
         }
 
 
-        Picasso.with(mContext).load(ImagePathUtil.getMovieImagePosterPath(mContext, items.get(position))).into(imageView);
+        Picasso.with(mContext).load(ImagePathUtil.getMovieImagePosterPath(mContext, items.get(position))).placeholder(R.drawable.loading_image_placeholder).error(R.drawable.loading_image_error_place_holder).into(imageView);
 
         return imageView;
 
