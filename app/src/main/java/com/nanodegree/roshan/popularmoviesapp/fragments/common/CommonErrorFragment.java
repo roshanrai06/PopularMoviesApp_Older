@@ -66,6 +66,6 @@ public class CommonErrorFragment extends PopularMoviesBaseFragment<CommonErrorFr
 
     @Override
     protected boolean requestDisplayHomeAsUpEnabled() {
-        return false;
+        return true;
     }
 }

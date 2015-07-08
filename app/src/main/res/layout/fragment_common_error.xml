@@ -2,7 +2,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-
     android:background="@android:color/white">
 
     <LinearLayout
@@ -22,18 +21,18 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/abc_action_bar_default_height_material"
-            android:layout_marginRight="@dimen/fragment_common_margin"
-            android:layout_marginTop="@dimen/fragment_common_margin"
+            android:layout_marginLeft="@dimen/common_dp_20"
+
+            android:layout_marginRight="@dimen/common_dp_10"
+            android:layout_marginTop="@dimen/common_dp_20"
             android:text="@string/common_error_fragment_message" />
 
         <Button
             android:id="@+id/fragment_error_retryButton"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/fragment_common_margin"
+            android:layout_marginTop="@dimen/common_dp_20"
             android:text="@string/retry_fragment_button" />
 
 

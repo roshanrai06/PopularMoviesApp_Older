@@ -12,7 +12,7 @@ public class PopularMoviesDetailsActivity extends PopularMoviesBaseActivity {
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
             Bundle args = getIntent().getExtras();
-            args.getParcelable("movie_result");
+            args.getParcelable("sorting_preference");
             launchFragment(PopularMoviesDetailsFragment.newInstance(args));
 
         }

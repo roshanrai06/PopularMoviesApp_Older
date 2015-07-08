@@ -66,7 +66,7 @@ public class PopularMoviesDetailsFragment extends PopularMoviesBaseFragment<Popu
             mMovieRelease.setText(getResources().getString(R.string.release_date) + getResources().getString(R.string.na));
 
         }
-        Picasso.with(getActivity()).load((ImagePathUtil.getMovieImageBackDropPath(getActivity(), mMoviesResults.getBackdropPath()))).placeholder(R.drawable.loading_image_back_path).error(R.drawable.loading_image_error_place_holder).into(mBackDropImageView);
+        Picasso.with(getActivity()).load((ImagePathUtil.getMovieImageBackDropPath(getActivity(), mMoviesResults.getBackdropPath()))).placeholder(R.drawable.loading_image_back_path).error(R.drawable.loading_image_back_path_error).into(mBackDropImageView);
         Picasso.with(getActivity()).load((ImagePathUtil.getMovieImagePosterPath(getActivity(), mMoviesResults.getPosterPath()))).placeholder(R.drawable.loading_image_placeholder).error(R.drawable.loading_image_error_place_holder).into(mPosterImageView);
 
 
