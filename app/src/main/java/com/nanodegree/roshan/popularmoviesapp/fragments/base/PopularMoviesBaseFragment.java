@@ -19,6 +19,10 @@ public abstract class PopularMoviesBaseFragment<E extends PopularMoviesBaseFragm
         return true;
     }
 
+    //To know the orientation changes in fragment.
+    public int getScreenOrientation() {
+        return getResources().getConfiguration().orientation;
+    }
 
     public interface PopularMoviesBaseFragmentListener extends BaseActionFragment.BaseActionFragmentListener {
         /**

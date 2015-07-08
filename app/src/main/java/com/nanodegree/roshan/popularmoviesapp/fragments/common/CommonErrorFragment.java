@@ -62,6 +62,7 @@ public class CommonErrorFragment extends PopularMoviesBaseFragment<CommonErrorFr
     @Override
     public void onBackClicked() {
         getCallback().onFragmentActionFinish();
+
     }
 
     @Override

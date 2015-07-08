@@ -15,6 +15,7 @@ import com.nanodegree.roshan.popularmoviesapp.fragments.dashboard.PopularMoviesD
 import com.nanodegree.roshan.popularmoviesapp.model.GetMoviesResponse;
 import com.nanodegree.roshan.popularmoviesapp.model.MoviesResults;
 import com.nanodegree.roshan.popularmoviesapp.movieapi.MoviesAPI;
+import com.nanodegree.roshan.popularmoviesapp.utils.Connectivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,7 +126,11 @@ public class PopularMoviesDashboardActivity extends PopularMoviesBaseActivity im
 
     @Override
     public void onRetryButtonClicked() {
-        requestMoviesDetails();
+        if (Connectivity.isConnected(this)) {
+            requestMoviesDetails();
+
+        }
+        showToast(getString(R.string.common_error_fragment_message));
     }
 
     @Override

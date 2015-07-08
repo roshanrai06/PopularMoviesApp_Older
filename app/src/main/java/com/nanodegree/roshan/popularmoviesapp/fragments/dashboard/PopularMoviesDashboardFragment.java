@@ -1,5 +1,6 @@
 package com.nanodegree.roshan.popularmoviesapp.fragments.dashboard;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -53,6 +54,12 @@ public class PopularMoviesDashboardFragment extends PopularMoviesBaseFragment<Po
     @Override
     public View onInitFragment(View rootView, Bundle savedInstanceState) {
         items = getArguments().getStringArrayList("movie_list");
+        if (getScreenOrientation() == Configuration.ORIENTATION_PORTRAIT) {
+            gridview.setNumColumns(3);
+
+        } else {
+            gridview.setNumColumns(5);
+        }
         gridview.setAdapter(new ImageAdapter(getActivity(), items));
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -62,6 +69,8 @@ public class PopularMoviesDashboardFragment extends PopularMoviesBaseFragment<Po
         });
         return rootView;
     }
+
+
 
     @Override
     public int getLayout() {

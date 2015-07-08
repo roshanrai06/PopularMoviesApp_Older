@@ -12,9 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.nanodegree.roshan.popularmoviesapp.fragments.base.BaseFragment;
 import com.nanodegree.roshan.popularmoviesapp.interfaces.BaseFragmentInterface;
+import com.nanodegree.roshan.popularmoviesapp.utils.CustomToast;
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseFragment.BaseFragmentListener {
 
@@ -30,6 +32,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseFrag
 
     @Override
     public void showToast(String message) {
+        CustomToast.showText(this, message,
+                Toast.LENGTH_SHORT);
 
     }
 

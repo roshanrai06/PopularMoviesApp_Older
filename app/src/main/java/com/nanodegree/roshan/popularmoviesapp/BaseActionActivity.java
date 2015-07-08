@@ -119,7 +119,21 @@ public abstract class BaseActionActivity extends BaseActivity implements BaseAct
         }
     }
 
+    public void saveFragmentFinishTo() {
+        mSaveFragmentFinishToList.add(getSupportFragmentManager().getBackStackEntryCount() - 1);
+    }
 
+    protected void clearFragmentFinishTo() {
+        mSaveFragmentFinishToList.clear();
+    }
+
+    protected boolean hasFragmentFinishToSet() {
+        return mSaveFragmentFinishToList.size() != 0;
+    }
+
+    public void removeTopFinishTo() {
+        mSaveFragmentFinishToList.remove(mSaveFragmentFinishToList.size() - 1);
+    }
     /**
      * Action fragment giving navigation to parent activity
      */
