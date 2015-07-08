@@ -11,9 +11,12 @@ Version
 Libs
 
 Picasso - powerful image downloading and caching library for Android.
-Butterknife,
-Retrofit,
-NineOldAndroid,
+
+Butterknife
+
+Retrofit
+
+NineOldAndroid
 
 
 TODOs
