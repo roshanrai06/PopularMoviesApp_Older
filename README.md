@@ -10,10 +10,10 @@ Version
 
 Libs
 
-Picasso - powerful image downloading and caching library for Android
-Butterknife
-Retrofit
-NineOldAndroid
+Picasso - powerful image downloading and caching library for Android.
+Butterknife,
+Retrofit,
+NineOldAndroid,
 TODOs
 
 Getting the movie's trailers and reviews
