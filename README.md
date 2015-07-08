@@ -14,6 +14,8 @@ Picasso - powerful image downloading and caching library for Android.
 Butterknife,
 Retrofit,
 NineOldAndroid,
+
+
 TODOs
 
 Getting the movie's trailers and reviews
