@@ -17,18 +17,26 @@ import butterknife.Bind;
 public class PopularMoviesDetailsFragment extends PopularMoviesBaseFragment<PopularMoviesDetailsFragment.PopularMoviesDetailsFragmentListener> {
 
     public static String FRAGMENT_TAG = "PopularMoviesDetailsFragment";
-    @Bind(R.id.movie_title)
-    TextView mMovieTitle;
-    @Bind(R.id.movie_rating)
-    TextView mMovieRating;
-    @Bind(R.id.movie_overview)
-    TextView mMovieOverview;
-    @Bind(R.id.movie_release_date)
-    TextView mMovieRelease;
+    //    @Bind(R.id.movie_title)
+//    TextView mMovieTitle;
+//    @Bind(R.id.movie_rating)
+//    TextView mMovieRating;
+//    @Bind(R.id.movie_overview)
+//    TextView mMovieOverview;
+//    @Bind(R.id.movie_release_date)
+//    TextView mMovieRelease;
     @Bind(R.id.movie_backdrop_image)
     ImageView mBackDropImageView;
-    @Bind(R.id.movie_poster)
-    ImageView mPosterImageView;
+    @Bind(R.id.toolbar)
+    Toolbar mToolbar;
+    @Bind(R.id.collapsing_toolbar)
+    CollapsingToolbarLayout collapsingToolbarLayout;
+    @Bind(R.id.app_bar_layout)
+    AppBarLayout mAppBarLayout;
+    @Bind(R.id.fab)
+    FloatingActionButton mFloatingActionButton;
+    //    @Bind(R.id.movie_poster)
+//    ImageView mPosterImageView;
     MoviesResults mMoviesResults;
 
     public static PopularMoviesDetailsFragment newInstance(Bundle args) {
@@ -44,33 +52,77 @@ public class PopularMoviesDetailsFragment extends PopularMoviesBaseFragment<Popu
     @Override
     public View onInitFragment(View rootView, Bundle savedInstanceState) {
 
+        ViewCompat.setTransitionName(mAppBarLayout, "dontKnow");
+        getActivity().supportPostponeEnterTransition();
 
-        mMovieTitle.setText(mMoviesResults.getTitle());
-
-        if (mMoviesResults.getVoteAverage() != null) {
-            mMovieRating.setText(getResources().getString(R.string.rating) + mMoviesResults.getVoteAverage().toString());
-
-        } else {
-            mMovieRating.setText(getResources().getString(R.string.rating) + getResources().getString(R.string.na));
-        }
-        if ((mMoviesResults.getOverview() != null)) {
-            mMovieOverview.setText(mMoviesResults.getOverview());
-        } else {
-            mMovieOverview.setText(getResources().getString(R.string.na));
+        mActivity.setSupportActionBar(mToolbar);
+        if (mActivity.getSupportActionBar() != null) {
+            mActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        if (mMoviesResults.getReleaseDate() != null) {
-            mMovieRelease.setText(getResources().getString(R.string.release_date) + mMoviesResults.getReleaseDate());
 
-        } else {
-            mMovieRelease.setText(getResources().getString(R.string.release_date) + getResources().getString(R.string.na));
+        String itemTitle = mMoviesResults.getTitle();
+        collapsingToolbarLayout.setTitle(itemTitle);
+        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
+//        mMovieTitle.setText(mMoviesResults.getTitle());
+//
+//        if (mMoviesResults.getVoteAverage() != null) {
+//            mMovieRating.setText(getResources().getString(R.string.rating) + mMoviesResults.getVoteAverage().toString());
+//
+//        } else {
+//            mMovieRating.setText(getResources().getString(R.string.rating) + getResources().getString(R.string.na));
+//        }
+//        if ((mMoviesResults.getOverview() != null)) {
+//            mMovieOverview.setText(mMoviesResults.getOverview());
+//        } else {
+//            mMovieOverview.setText(getResources().getString(R.string.na));
+//        }
+//
+//        if (mMoviesResults.getReleaseDate() != null) {
+//            mMovieRelease.setText(getResources().getString(R.string.release_date) + mMoviesResults.getReleaseDate());
+//
+//        } else {
+//            mMovieRelease.setText(getResources().getString(R.string.release_date) + getResources().getString(R.string.na));
+//
+//        }
+        Picasso.with(getActivity()).load((ImagePathUtil.getMovieImageBackDropPath(getActivity(), mMoviesResults.getBackdropPath()))).placeholder(R.drawable.loading_image_back_path).error(R.drawable.loading_image_back_path_error).into(mBackDropImageView, new Callback() {
+            @Override
+            public void onSuccess() {
+                Bitmap bitmap = ((BitmapDrawable) mBackDropImageView.getDrawable()).getBitmap();
+                Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+                    public void onGenerated(Palette palette) {
+                        applyPalette(palette);
+                    }
+                });
 
-        }
-        Picasso.with(getActivity()).load((ImagePathUtil.getMovieImageBackDropPath(getActivity(), mMoviesResults.getBackdropPath()))).placeholder(R.drawable.loading_image_back_path).error(R.drawable.loading_image_back_path_error).into(mBackDropImageView);
-        Picasso.with(getActivity()).load((ImagePathUtil.getMovieImagePosterPath(getActivity(), mMoviesResults.getPosterPath()))).placeholder(R.drawable.loading_image_placeholder).error(R.drawable.loading_image_error_place_holder).into(mPosterImageView);
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
+        //Picasso.with(getActivity()).load((ImagePathUtil.getMovieImagePosterPath(getActivity(), mMoviesResults.getPosterPath()))).placeholder(R.drawable.loading_image_placeholder).error(R.drawable.loading_image_error_place_holder).into(mPosterImageView);
 
 
         return rootView;
+    }
+
+    private void applyPalette(Palette palette) {
+        int primaryDark = getResources().getColor(R.color.primary_dark);
+        int primary = getResources().getColor(R.color.primary);
+        collapsingToolbarLayout.setContentScrimColor(palette.getMutedColor(primary));
+        collapsingToolbarLayout.setStatusBarScrimColor(palette.getDarkMutedColor(primaryDark));
+        updateBackground(mFloatingActionButton, palette);
+        getActivity().supportStartPostponedEnterTransition();
+    }
+
+    private void updateBackground(FloatingActionButton fab, Palette palette) {
+        int lightVibrantColor = palette.getLightVibrantColor(getResources().getColor(android.R.color.white));
+        int vibrantColor = palette.getVibrantColor(getResources().getColor(R.color.accent));
+
+        fab.setRippleColor(lightVibrantColor);
+        fab.setBackgroundTintList(ColorStateList.valueOf(vibrantColor));
     }
 
     @Override
@@ -85,6 +137,7 @@ public class PopularMoviesDetailsFragment extends PopularMoviesBaseFragment<Popu
         mMoviesResults = getArguments().getParcelable("movie_result");
 
     }
+
 
     @Override
     public int getFragmentTitleResource() {
