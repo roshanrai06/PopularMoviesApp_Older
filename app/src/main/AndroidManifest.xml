@@ -32,6 +32,8 @@
             android:launchMode="singleTop">
 
         </activity>
+        <provider android:authorities="com.nanodegree.roshan.popularmoviesapp"
+            android:name=".data.MovieProvider" ></provider>
     </application>
 
 </manifest>

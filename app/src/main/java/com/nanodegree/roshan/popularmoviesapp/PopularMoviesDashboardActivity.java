@@ -1,7 +1,9 @@
 package com.nanodegree.roshan.popularmoviesapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
@@ -12,6 +14,7 @@ import android.view.MenuItem;
 
 import com.nanodegree.roshan.popularmoviesapp.fragments.common.CommonErrorFragment;
 import com.nanodegree.roshan.popularmoviesapp.fragments.dashboard.PopularMoviesDashboardFragment;
+import com.nanodegree.roshan.popularmoviesapp.fragments.details.PopularMoviesDetailsFragment;
 import com.nanodegree.roshan.popularmoviesapp.model.GetMoviesResponse;
 import com.nanodegree.roshan.popularmoviesapp.model.MoviesResults;
 import com.nanodegree.roshan.popularmoviesapp.movieapi.MoviesAPI;
@@ -34,15 +37,41 @@ public class PopularMoviesDashboardActivity extends PopularMoviesBaseActivity im
     private String mSortingPreference;
     private List<MoviesResults> mMoviesResults;
     private static final String TAG = PopularMoviesDashboardActivity.class.getName();
+    private boolean mTwoPane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState == null) {
-            requestMoviesDetails();
+
+        if (isTablet(this)) {
+            // The detail container view will be present only in the large-screen layouts
+            // (res/layout-sw600dp). If this view is present, then the activity should be
+            // in two-pane mode.
+            mTwoPane = true;
+            // In two-pane mode, show the detail view in this activity by
+            // adding or replacing the detail fragment using a
+            // fragment transaction.
+            if (savedInstanceState == null) {
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.movie_detail_container, PopularMoviesDetailsFragment.newInstance(new Bundle()), PopularMoviesDetailsFragment.FRAGMENT_TAG)
+                        .commit();
+            }
+        } else {
+            mTwoPane = false;
+            if (savedInstanceState == null) {
+                requestMoviesDetails();
+            }
+
         }
 
 
+    }
+
+    public static boolean isTablet(Context context) {
+        return (context.getResources().getConfiguration().screenLayout
+                & Configuration.SCREENLAYOUT_SIZE_MASK)
+                >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 
     @Override
@@ -122,6 +151,12 @@ public class PopularMoviesDashboardActivity extends PopularMoviesBaseActivity im
     @Override
     protected void onResume() {
         super.onResume();
+        //evaluate mTwoPane
+        if (findViewById(R.id.movie_detail_container) != null) {
+            mTwoPane = true;
+        } else {
+            mTwoPane = false;
+        }
     }
 
     @Override
@@ -135,9 +170,27 @@ public class PopularMoviesDashboardActivity extends PopularMoviesBaseActivity im
 
     @Override
     public void onMoviePosterClicked(int position) {
-        Intent intent = new Intent(this, PopularMoviesDetailsActivity.class);
-        intent.putExtra(movie_result, mMoviesResults.get(position));
-        startActivity(intent);
+        if (mTwoPane) {
+            // In two-pane mode, show the detail view in this activity by
+            // adding or replacing the detail fragment using a
+            // fragment transaction.
+            Bundle args = new Bundle();
+            args.putParcelableArrayList(movie_result, (ArrayList<? extends Parcelable>) mMoviesResults);
 
+            // args.putString(PopularMoviesDetailsFragment.MOVIE_DETAILS, mMoviesResults);
+
+            PopularMoviesDetailsFragment fragment = new PopularMoviesDetailsFragment();
+            fragment.setArguments(args);
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.movie_detail_container, fragment, PopularMoviesDetailsFragment.FRAGMENT_TAG)
+                    .commit();
+
+
+        } else {
+            Intent intent = new Intent(this, PopularMoviesDetailsActivity.class);
+            intent.putExtra(movie_result, mMoviesResults.get(position));
+            startActivity(intent);
+        }
     }
 }

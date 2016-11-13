@@ -48,7 +48,6 @@ public class ImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-
         Picasso.with(mContext).load(ImagePathUtil.getMovieImagePosterPath(mContext, items.get(position))).placeholder(R.drawable.loading_image_placeholder).error(R.drawable.loading_image_error_place_holder).into(imageView);
 
         return imageView;
